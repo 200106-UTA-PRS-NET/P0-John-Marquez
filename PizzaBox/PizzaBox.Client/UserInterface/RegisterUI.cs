@@ -32,6 +32,26 @@ namespace PizzaBox.Client.UserInterface
                 Console.Write("Password: ");
                 newPassword = Console.ReadLine();
 
+                if(nameFirst.Length == 0 || nameLast.Length == 0 || newId.Length == 0 || newPassword.Length == 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("No null values allowed when creating an account");
+                    Console.WriteLine("Press 'b' to return to last page or any other key to try again");
+                    ConsoleKeyInfo key1;
+                    key1 = Console.ReadKey();
+                    Console.WriteLine();
+                    switch (key1.Key)
+                    {
+                        case ConsoleKey.B:
+                            MainUI.startupUI();
+                            break;
+                        default:
+                            registerUI();
+                            break;
+                    }
+
+                }
+
                 Entity db = AccessDb.acc();   //Singleton used to access data
                 var customers = Repository.GetCustomer(db);
                 foreach (var cus in customers)
